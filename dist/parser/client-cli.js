@@ -113,7 +113,7 @@ program
     .option('-h, --host <host>', 'Specify the host of the project')
     .action(async (args) => {
     await initLocale();
-    const configPath = path.resolve(process.cwd(), 'nestcanddy.config.js');
+    const configPath = path.resolve(process.cwd(), 'nestcanddy.config.cjs');
     if (fs.existsSync(configPath)) {
         const config = require(configPath);
         if (args.host && config?.client?.host) {
@@ -122,7 +122,7 @@ program
         new ClientCli(config?.client || {}).getSdkStart();
     }
     else {
-        console.log(chalk.red('No nestcanddy.config.js file found in the current directory'));
+        console.log(chalk.red('No nestcanddy.config.cjs file found in the current directory'));
     }
 });
 program.parse(process.argv);

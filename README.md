@@ -50,7 +50,7 @@ nests s
 
 If you are a frontend developer using TypeScript for any project:
 
-1. Add `nestcanddy.config.js` to the root directory of the nestjs project
+1. Add `nestcanddy.config.cjs` to the root directory of the nestjs project
 ```javascript
 module.exports = {
 	client:{
@@ -124,7 +124,7 @@ nests s
 
 如果你当前的角色是使用Typescript开发任何项目的前端开发人员：
 
-1. 在nestjs的项目根目录下新增`nestcanddy.config.js`
+1. 在nestjs的项目根目录下新增`nestcanddy.config.cjs`
 ```javascript
 module.exports = {
 	client:{

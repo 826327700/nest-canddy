@@ -51,7 +51,7 @@ nests s
 
 如果你当前的角色是使用Typescript开发任何项目的前端开发人员：
 
-1. 在nestjs的项目根目录下新增`nestcanddy.config.js`
+1. 在nestjs的项目根目录下新增`nestcanddy.config.cjs`
 ```javascript
 module.exports = {
 	client:{

@@ -700,10 +700,14 @@ class NestParser {
                                         }
                                     });
                                     let jsDocs = property.getJsDocs().map(jsDoc => jsDoc.getStructure());
-                                    try {
-                                        property.getDecorators();
-                                    }
-                                    catch (error) {
+                                    if (property.getDecorator) {
+                                        let swaggerDeco = property.getDecorator("ApiProperty");
+                                        if (swaggerDeco) {
+                                            let args = this.parseDecoratorArgs(swaggerDeco);
+                                            if (args.length > 0) {
+                                                jsDocs.push({ description: args[0].value.description });
+                                            }
+                                        }
                                     }
                                     let apiOperationDecorator = property.getDecorators().find(decorator => decorator.getName() === "Column");
                                     if (apiOperationDecorator) {
@@ -761,7 +765,16 @@ class NestParser {
                                         importMapSet.set(importPath, new Set(typesSet));
                                     }
                                 });
-                                let jsDocs = property.getJsDocs().map(jsDoc => jsDoc.getStructure());
+                                let jsDocs = property.getJsDocs().map(jsDoc => jsDoc.getStructure()) || [];
+                                if (property.getDecorator) {
+                                    let swaggerDeco = property.getDecorator("ApiProperty");
+                                    if (swaggerDeco) {
+                                        let args = this.parseDecoratorArgs(swaggerDeco);
+                                        if (args.length > 0) {
+                                            jsDocs.push({ description: args[0].value.description });
+                                        }
+                                    }
+                                }
                                 if (typeNode.getKind() === ts_morph_1.SyntaxKind.ClassDeclaration) {
                                     try {
                                         let apiOperationDecorator = property.getDecorators().find(decorator => decorator.getName() === "Column");
