@@ -58,7 +58,9 @@ module.exports = {
 		host: 'localhost:13270',//后端提供的SDK服务地址
 		outputPath:'./output',//SDK输出到当前项目的相对路径
 		httpAdapterPath:'axios',//发起http请求的适配器引用路径
-		httpAdapterName:'axios'//发起http请求的适配器引用名称
+		httpAdapterName:'axios',//发起http请求的适配器引用名称
+		responseWrapperType:'{AxiosResponse}',//返回类型包裹类型
+		responseWrapperTypePath:'axios',//返回类型包裹类型路径
 	}
 }
 ```

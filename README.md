@@ -1,5 +1,6 @@
 # English Document
 [中文文档](https://github.com/826327700/nest-canddy/blob/master/README.zh-CN.md)，如果github访问不了,本页面后半部分为中文文档。
+[更详细的中文文章](https://juejin.cn/post/7413939828202848294)
 # nest-canddy
 
 `nest-canddy` is a non-intrusive CLI tool that can quickly generate TypeScript SDK code for the frontend to make HTTP requests. It also provides a visual web UI interface to simply display the project module structure.
@@ -57,7 +58,9 @@ module.exports = {
 		host: 'localhost:13270',//Backend SDK service address
 		outputPath:'./output',//Relative path to output the SDK in the current project
 		httpAdapterPath:'axios',//Path to the HTTP request adapter
-		httpAdapterName:'axios'//Name of the HTTP request adapter
+		httpAdapterName:'axios',//Name of the HTTP request adapter
+		responseWrapperType:'{AxiosResponse}',//Return type wrapper type
+		responseWrapperTypePath:'axios',//Return type wrapper type path
 	}
 }
 ```
@@ -131,7 +134,9 @@ module.exports = {
 		host: 'localhost:13270',//后端提供的SDK服务地址
 		outputPath:'./output',//SDK输出到当前项目的相对路径
 		httpAdapterPath:'axios',//发起http请求的适配器引用路径
-		httpAdapterName:'axios'//发起http请求的适配器引用名称
+		httpAdapterName:'axios',//发起http请求的适配器引用名称
+		responseWrapperType:'{AxiosResponse}',//返回类型包裹类型
+		responseWrapperTypePath:'axios',//返回类型包裹类型路径
 	}
 }
 ```

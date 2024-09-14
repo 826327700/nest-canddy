@@ -613,7 +613,7 @@ class NestParser {
                         isStatic: true,
                         name: methodInfo.methodName,
                         parameters: methodInfo.params,
-                        returnType: `Promise<${methodInfo.returnType.type}>`,
+                        returnType: `Promise<{{RETURN_TPYE_WRAPPER_START}}${methodInfo.returnType.type}{{RETURN_TPYE_WRAPPER_END}}>`,
                         statements: statements
                     };
                 })
@@ -726,7 +726,7 @@ class NestParser {
                                         }
                                     }
                                     return {
-                                        name: property.getName(),
+                                        name: property.getName() + (property.hasQuestionToken() ? '?' : ''),
                                         type: parseType.type,
                                         docs: jsDocs
                                     };
@@ -798,7 +798,7 @@ class NestParser {
                                     }
                                 }
                                 return {
-                                    name: property.getName(),
+                                    name: property.getName() + (property.hasQuestionToken() ? '?' : ''),
                                     type: parseType.type,
                                     docs: jsDocs
                                 };

@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
 const enquirer_1 = require("./enquirer");
+const ts_morph_1 = require("ts-morph");
 const { program } = require('commander');
 const pkg = require('../../package.json');
 const chalk = require('chalk');
@@ -101,7 +102,21 @@ class ClientCli {
         if (!fs.existsSync(saveDir)) {
             fs.mkdirSync(saveDir, { recursive: true });
         }
-        fs.writeFileSync(savePath, fileContent);
+        if (this.options.responseWrapperType) {
+            const responseWrapperType = this.options.responseWrapperType.replace(/[{}]/g, '');
+            fileContent = fileContent.replace(/{{RETURN_TPYE_WRAPPER_START}}/g, responseWrapperType + '<');
+            fileContent = fileContent.replace(/{{RETURN_TPYE_WRAPPER_END}}/g, '>');
+            const project = new ts_morph_1.Project();
+            const sourceFile = project.createSourceFile(savePath, fileContent, { overwrite: true });
+            sourceFile.addImportDeclaration({
+                moduleSpecifier: this.options.responseWrapperTypePath,
+                defaultImport: this.options.responseWrapperType
+            });
+            sourceFile.saveSync();
+        }
+        else {
+            fs.writeFileSync(savePath, fileContent);
+        }
         console.log(chalk.blue(savePath), chalk.green(t('downloaded')));
     }
 }
